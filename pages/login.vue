@@ -1,7 +1,8 @@
 <template>
   <div class="flex w-screen bg-[##EEEEEE] h-screen">
+    <!--https://www.figma.com/design/7T1wkErczpMOBeqtpVjMSb/Login-Page-Design?node-id=6-920&node-type=canvas&t=bXCBDRY3wttdLmoM-0-->
     <div
-      class="px-8 bg-white w-96 h-full border-r shadow-2xl flex flex-col items-center pt-24 pb-24"
+      class="px-8 bg-white w-[34rem] h-full border-r shadow-2xl flex flex-col items-center pt-24 pb-24"
     >
       <p class="flex flex-row-reverse gap-2 text-xl text-blue-950">
         Reunião dos Devs
@@ -19,9 +20,8 @@
           <ElLink type="primary">Esqueceu a senha?</ElLink>
         </div>
 
-        <ElButton type="success">Entrar</ElButton>
+        <ElButton type="success" @click="signIn">Entrar</ElButton>
       </div>
-      <!--https://www.figma.com/design/7T1wkErczpMOBeqtpVjMSb/Login-Page-Design?node-id=6-920&node-type=canvas&t=bXCBDRY3wttdLmoM-0-->
 
       <div class="mt-4 flex flex-col gap-2 items-center">
         <p>Ou</p>
@@ -35,6 +35,28 @@
 </template>
 
 <script setup>
+import axios from "axios";
+import { useUserStore } from "~/store/user.store";
+
 const email = ref();
 const password = ref();
+
+async function signIn() {
+  try {
+    const response = await axios.post("http://localhost:8000/api/login", {
+      email: email.value,
+      password: password.value,
+    });
+
+    if (response.data.user) {
+      const userStore = useUserStore();
+      userStore.setUser(response.data.user);
+      console.log(userStore.user);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  console.log(response);
+}
 </script>
