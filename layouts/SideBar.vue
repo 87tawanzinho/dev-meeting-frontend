@@ -1,7 +1,6 @@
 <template>
   <el-tabs :tab-position="tabPosition" style="height: 100vh" class="demo-tabs">
-    <el-tab-pane label="Projetos">Conteúdo de Projetos</el-tab-pane>
-
+    <el-tab-pane label="Projetos"> <Projects /> </el-tab-pane>
     <el-tab-pane label="Configuração">Conteúdo de Configuração</el-tab-pane>
     <el-tab-pane label="Papel">Conteúdo de Papel</el-tab-pane>
     <el-tab-pane label="Tarefas">Conteúdo de Tarefas</el-tab-pane>
@@ -11,6 +10,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import type { TabsInstance } from "element-plus";
+import Projects from "../components/Projects.vue";
 
 const tabPosition = ref<TabsInstance["tabPosition"]>("left");
 </script>
