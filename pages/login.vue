@@ -36,6 +36,7 @@
 
 <script setup>
 import axios from "axios";
+import { useAuthStore } from "~/store/auth.store";
 import { useUserStore } from "~/store/user.store";
 
 const email = ref();
@@ -50,13 +51,15 @@ async function signIn() {
 
     if (response.data.user) {
       const userStore = useUserStore();
+      const authStore = useAuthStore();
       userStore.setUser(response.data.user);
+      authStore.login();
       console.log(userStore.user);
+
+      return navigateTo("/home");
     }
   } catch (err) {
     console.log(err);
   }
-
-  console.log(response);
 }
 </script>
