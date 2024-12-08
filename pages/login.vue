@@ -52,6 +52,7 @@ async function signIn() {
     if (response.data.user) {
       const userStore = useUserStore();
       const authStore = useAuthStore();
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       userStore.setUser(response.data.user);
       authStore.login();
       console.log(userStore.user);
