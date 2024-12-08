@@ -17,6 +17,12 @@ onMounted(() => {
       const userStore = useUserStore();
       userStore.setUser(JSON.parse(user));
     }
+
+    if (localStorage.getItem("projects")) {
+      const projects = localStorage.getItem("projects");
+      const userStore = useUserStore();
+      userStore.setProjects(JSON.parse(projects));
+    }
   }
 });
 </script>

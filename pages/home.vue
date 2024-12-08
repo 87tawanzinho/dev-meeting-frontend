@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col w-screen">
     <TopBar />
     <SideBar />
   </div>

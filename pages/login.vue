@@ -57,6 +57,11 @@ async function signIn() {
       authStore.login();
       console.log(userStore.user);
 
+      const projects = await axios.get(
+        `http://localhost:8000/api/userprojects/${userStore.user.id}`
+      );
+      localStorage.setItem("projects", JSON.stringify(projects.data));
+      userStore.setProjects(projects.data);
       return navigateTo("/home");
     }
   } catch (err) {
