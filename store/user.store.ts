@@ -6,7 +6,7 @@ interface user {
 }
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: {},
+    user: {} as user,
   }),
   actions: {
     setUser(user: user) {

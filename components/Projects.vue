@@ -10,6 +10,7 @@
         </ElInput>
         <CreateNewProject />
       </div>
+      <MyProjects />
     </div>
   </div>
 </template>
@@ -20,4 +21,10 @@ import { useUserStore } from "~/store/user.store";
 const userStore = useUserStore();
 const openNewProject = ref(false);
 const search = ref();
+
+onMounted(() => {
+  if (userStore.user) {
+    navigateTo("/home");
+  }
+});
 </script>
