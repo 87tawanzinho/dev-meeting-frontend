@@ -26,3 +26,12 @@ onMounted(() => {
   }
 });
 </script>
+
+<style>
+p,
+h2,
+h1,
+h3 {
+  color: #535353;
+}
+</style>

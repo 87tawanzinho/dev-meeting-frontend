@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2>Olá, {{ userStore.user.name }}</h2>
+      <h2 class="">Olá, {{ userStore.user.name }}</h2>
       <div class="flex gap-2">
         <ElInput placeholder="Procurar Projetos" class="w-24" v-model="search">
           <template #prefix>

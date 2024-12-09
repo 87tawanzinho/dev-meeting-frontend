@@ -10,15 +10,17 @@
       </p>
       <p class="text-black">Entre na sua conta</p>
       <div class="flex flex-col justify-center gap-2">
-        <div>
-          <ElText>E-mail</ElText>
-          <ElInput type="text" v-model="email" />
-        </div>
-        <div>
-          <ElText>Senha</ElText>
-          <ElInput type="text" v-model="password" />
-          <ElLink type="primary">Esqueceu a senha?</ElLink>
-        </div>
+        <form action="">
+          <div>
+            <ElText>E-mail</ElText>
+            <ElInput type="text" v-model="email" />
+          </div>
+          <div>
+            <ElText>Senha</ElText>
+            <ElInput type="text" v-model="password" />
+            <ElLink type="primary">Esqueceu a senha?</ElLink>
+          </div>
+        </form>
 
         <ElButton type="success" @click="signIn">Entrar</ElButton>
       </div>

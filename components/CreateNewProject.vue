@@ -1,6 +1,10 @@
 <template>
-  <ElButton type="primary" @click="centerDialogVisible = true"
-    >Novo Projeto</ElButton
+  <ElButton
+    type="primary"
+    @click="centerDialogVisible = true"
+    class="custom-black-button"
+  >
+    <Icon name="mdi:plus" size="20" class="mr-2" /> Novo Projeto</ElButton
   >
 
   <el-dialog
@@ -41,7 +45,9 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="closingModal">Cancelar</el-button>
-        <el-button type="primary" @click="createProject"> Confirmar </el-button>
+        <el-button type="primary" @click="createProject" :disabled="isClicked">
+          Confirmar
+        </el-button>
       </div>
     </template>
   </el-dialog>
@@ -69,21 +75,36 @@ const typeOfProject = ref();
 const dateStartOfProject = ref();
 const dateEndOfProject = ref();
 
+const isClicked = ref(false);
+
 const userStore = useUserStore();
 
 async function createProject() {
+  isClicked.value = true;
   try {
     await axios.post("http://localhost:8000/api/createproject", {
       name: nameOfProject.value,
       description: descriptionOfProject.value,
       user_id: userStore.user.id,
+      type: typeOfProject.value,
       start_date: dateStartOfProject.value,
       end_date: dateEndOfProject.value,
     });
-    ElMessage("Você criou um novo projeto");
+
+    const projects = await axios.get(
+      `http://localhost:8000/api/userprojects/${userStore.user.id}`
+    );
+    localStorage.setItem("projects", JSON.stringify(projects.data));
+    userStore.setProjects(projects.data);
+    ElMessage({
+      message: "Você criou um novo projeto!",
+      type: "success",
+    });
     centerDialogVisible.value = false;
   } catch (err) {
     console.log(err);
+  } finally {
+    isClicked.value = false;
   }
 }
 
